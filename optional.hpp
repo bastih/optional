@@ -47,6 +47,7 @@
 #  define OPTIONAL_HAS_USING 0
 # endif 
 
+#pragma GCC system_header
 
 namespace std{
 
@@ -59,8 +60,10 @@ namespace std{
 
 #  if OPTIONAL_HAS_USING
 // the only bit GCC 4.7 and clang 3.2 don't have
+#  if (__GLIBCXX__ < 20130604)
 template <class T>
 using is_trivially_destructible = typename std::has_trivial_destructor<T>;
+#  endif
 #  endif
 
 #  if (defined __GNUC__) && ((__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 7)))
